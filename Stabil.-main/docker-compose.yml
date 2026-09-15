@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  stabil-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: stabil-app:latest
+    container_name: stabil-surgical-tracker
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - FLASK_ENV=production
+    volumes:
+      - ./stabil.db:/app/stabil.db
+      - ./sessions.csv:/app/sessions.csv

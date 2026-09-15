@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STABIL.</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Additional inline styles to match the specific "dark" aesthetic from the image 
+           which might have been lost or was part of a specific override */
+
+        .hero-buttons {
+            margin-top: 30px;
+        }
+
+        .hero-btn {
+            background: white;
+            color: black;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            margin-right: 20px;
+            display: inline-block;
+            font-size: 14px;
+        }
+
+        .hero-btn.outline {
+            background: transparent;
+            color: white;
+            border: 1px solid white;
+        }
+
+        .section-title {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #333;
+        }
+
+        .feature-card {
+            background: #1c1c1c;
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            width: 300px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .dark-section {
+            background: #1c1c1c;
+            padding: 100px 80px;
+            color: white;
+            text-align: center;
+        }
+
+        .info-card {
+            background: #2b2b2b;
+            padding: 40px;
+            border-radius: 8px;
+            width: 300px;
+            text-align: left;
+            position: relative;
+        }
+
+        .info-card.middle {
+            background: #333;
+            transform: scale(1.05);
+            /* Highlight middle card */
+        }
+
+        .info-card h3 {
+            font-family: 'Josefin Sans', sans-serif;
+            margin-bottom: 20px;
+            font-size: 20px;
+            text-transform: uppercase;
+        }
+
+        .info-card p {
+            font-size: 14px;
+            color: #ccc;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .info-btn {
+            border: 1px solid white;
+            padding: 10px 24px;
+            border-radius: 20px;
+            font-size: 11px;
+            text-decoration: none;
+            color: white;
+            display: inline-block;
+            letter-spacing: 1px;
+        }
+
+        .middle .info-btn {
+            background: white;
+            color: black;
+            font-weight: bold;
+        }
+
+        .workflow-section {
+            background: #2b2b2b;
+            padding: 80px;
+            text-align: center;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="logo">STABIL.</div>
+        <div>
+            <a href="/">Home</a>
+            <a href="/train">Device Setup & Train</a>
+            <a href="/result">Results</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/reports">Reports</a>
+        </div>
+    </div>
+
+    <div class="hero-dark">
+        <p style="color:#00e676; letter-spacing: 2px; font-weight: 600; margin-bottom: 10px;">PRECISION MATTERS...</p>
+        <h1 style="font-family: 'Josefin Sans', sans-serif; font-size: 54px; line-height: 1.2; margin-bottom: 30px;">
+            Elevating Surgical<br>Precision, with<br>STABIL.
+        </h1>
+        <div class="hero-buttons">
+            <a href="/train" class="hero-btn">START PRACTICE</a>
+            <a href="/train" class="hero-btn outline" style="border-color: #38bdf8; color: #38bdf8;">HARDWARE & CAM CHECK ⚡</a>
+            <a href="/dashboard" class="hero-btn outline">VIEW STATISTICS</a>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div style="padding: 100px 80px; display: flex; flex-direction: column; align-items: center;">
+        <h2 class="section-title">Revolutionizing Surgical Training<br>with Cutting Precision</h2>
+
+        <div style="display: flex; gap: 30px; flex-wrap: wrap; justify-content: center;">
+            <div class="feature-card">
+                Real-Time<br>Feedback
+            </div>
+            <div class="feature-card">
+                Precision<br>Scoring
+            </div>
+            <div class="feature-card">
+                Angle<br>Tracking
+            </div>
+        </div>
+
+        <p style="margin-top: 60px; color: #666; max-width: 800px; text-align: center; line-height: 1.6;">
+            At STABIL, we believe that precision is the cornerstone of successful surgical outcomes. Our AI-powered
+            surgical hand
+            trainer harnesses the power of advanced technology to elevate the skills of medical professionals.
+        </p>
+    </div>
+
+    <!-- Audience/Info Section -->
+    <div class="dark-section">
+        <h2 style="font-family: 'Josefin Sans', sans-serif; font-size: 42px; margin-bottom: 80px;">Empowering
+            Medical<br>Professionals</h2>
+
+        <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
+
+            <div class="info-card">
+                <h3>For Medical<br>Students</h3>
+                <p>Build strong foundational skills with objective feedback from the very first practice session.</p>
+                <a href="#" class="info-btn">MORE INFO.</a>
+            </div>
+
+            <div class="info-card middle">
+                <h3>For Surgical<br>Residents</h3>
+                <p>Refine advanced techniques through measurable precision and targeted correction.</p>
+                <a href="#" class="info-btn">MORE INFO.</a>
+            </div>
+
+            <div class="info-card">
+                <h3>For Experienced<br>Surgeons</h3>
+                <p>Maintain and recalibrate fine motor skills using data-driven performance insights.</p>
+                <a href="#" class="info-btn">MORE INFO.</a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Workflow footer placeholder -->
+    <div class="workflow-section">
+        <h2 style="font-family: 'Josefin Sans', sans-serif; font-size: 32px; margin-bottom: 60px;">System Workflow</h2>
+
+        <div class="workflow-container">
+            <!-- Step 1 -->
+            <div class="workflow-step">
+                <div class="step-icon">📷</div>
+                <h3>Video Input</h3>
+                <p>High-speed webcam capture</p>
+            </div>
+
+            <div class="arrow">➔</div>
+
+            <!-- Step 2 -->
+            <div class="workflow-step">
+                <div class="step-icon">🧠</div>
+                <h3>AI Analysis</h3>
+                <p>Computer Vision tracking</p>
+            </div>
+
+            <div class="arrow">➔</div>
+
+            <!-- Step 3 -->
+            <div class="workflow-step">
+                <div class="step-icon">⚡</div>
+                <h3>Motion Metrics</h3>
+                <p>Tremor & Path calculation</p>
+            </div>
+
+            <div class="arrow">➔</div>
+
+            <!-- Step 4 -->
+            <div class="workflow-step">
+                <div class="step-icon">🎯</div>
+                <h3>PSI Scoring</h3>
+                <p>Precision Stability Index</p>
+            </div>
+        </div>
+
+        <style>
+            .workflow-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            .workflow-step {
+                background: #1c1c1c;
+                padding: 30px;
+                border-radius: 16px;
+                width: 200px;
+                text-align: center;
+                border: 1px solid #333;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .workflow-step:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 10px 30px rgba(0, 230, 118, 0.1);
+                border-color: #00e676;
+            }
+
+            .step-icon {
+                font-size: 40px;
+                margin-bottom: 15px;
+            }
+
+            .workflow-step h3 {
+                color: white;
+                font-family: 'Josefin Sans', sans-serif;
+                margin-bottom: 10px;
+            }
+
+            .workflow-step p {
+                color: #888;
+                font-size: 14px;
+                line-height: 1.4;
+            }
+
+            .arrow {
+                font-size: 30px;
+                color: #333;
+                font-weight: bold;
+            }
+
+            @media (max-width: 900px) {
+                .workflow-container {
+                    flex-direction: column;
+                }
+
+                .arrow {
+                    transform: rotate(90deg);
+                }
+            }
+        </style>
+    </div>
+
+</body>
+
+</html>

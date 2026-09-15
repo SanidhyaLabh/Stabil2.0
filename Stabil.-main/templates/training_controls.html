@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block title %}Training Controls{% endblock %}
+
+{% block content %}
+
+<section class="hero-dark">
+    <h1>Training Controls</h1>
+</section>
+
+<section class="container">
+
+<div class="card">
+    <h2>Difficulty Level</h2>
+    <select>
+        <option>Beginner</option>
+        <option>Intermediate</option>
+        <option>Expert</option>
+    </select>
+</div>
+
+<div class="card">
+    <h2>Target PSI</h2>
+    <input type="number" value="85">
+</div>
+
+</section>
+
+{% endblock %}

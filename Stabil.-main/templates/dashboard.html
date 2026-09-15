@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>STABIL. | Dashboard</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&family=Poppins:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #1E1E1E;
+            color: white;
+        }
+
+        .header {
+            padding: 40px 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 48px;
+        }
+
+        .content {
+            padding: 0 80px 100px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: #2b2b2b;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid #333;
+        }
+
+        .card h2 {
+            font-family: 'Josefin Sans', sans-serif;
+            margin-bottom: 10px;
+            color: #aaa;
+            font-size: 18px;
+        }
+
+        .card h1 {
+            font-size: 36px;
+            color: #fff;
+        }
+
+        canvas {
+            background: #2b2b2b;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 40px;
+            border: 1px solid #333;
+        }
+
+        .nav-link {
+            color: #aaa;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>Performance Dashboard</h1>
+        <div>
+            <a href="/" class="nav-link">Home</a>
+            <a href="/progress" class="nav-link">Planner</a>
+            <a href="/replay" class="nav-link">Replay</a>
+        </div>
+    </div>
+
+    <section class="content">
+
+        <div class="cards">
+
+            <div class="card">
+                <h2>Sessions Completed</h2>
+                <h1>{{ psi|length }}</h1>
+            </div>
+
+            <div class="card">
+                <h2>Latest PSI</h2>
+                <h1>{{ psi[-1] if psi else 0 }}</h1>
+            </div>
+
+            <div class="card">
+                <h2>Latest Tremor</h2>
+                <h1>{{ tremor[-1] if tremor else 0 }}</h1>
+            </div>
+
+        </div>
+
+        <canvas id="psiChart"></canvas>
+        <canvas id="tremorChart"></canvas>
+        <canvas id="errorChart"></canvas>
+
+    </section>
+
+    <script>
+        // Use 'modes' if it exists, otherwise use 'labels' (timestamps)
+        // If logic in app.py passes 'labels' correctly, we use that.
+        // We passed 'modes=labels' in app.py to cover both bases or we rename here.
+        const labels = {{ labels | tojson | safe }};
+        const psi = {{ psi | tojson | safe }};
+        const tremor = {{ tremor | tojson | safe }};
+        const error = {{ error | tojson | safe }};
+
+        Chart.defaults.color = '#aaa';
+        Chart.defaults.borderColor = '#444';
+
+        new Chart(document.getElementById('psiChart'), {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'PSI Score',
+                    data: psi,
+                    borderWidth: 3,
+                    tension: 0.4,
+                    borderColor: '#00c853',
+                    backgroundColor: 'rgba(0, 200, 83, 0.1)',
+                    fill: true
+                }]
+            },
+            options: {
+                plugins: {
+                    title: { display: true, text: 'Overall PSI Performance', font: { size: 16 } }
+                },
+                scales: {
+                    y: { beginAtZero: true, max: 100 }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('tremorChart'), {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Tremor Stability', // Lower is better, but this raw data might vary
+                    data: tremor,
+                    borderWidth: 3,
+                    tension: 0.4,
+                    borderColor: '#ffeb3b'
+                }]
+            }
+        });
+
+        new Chart(document.getElementById('errorChart'), {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Path Error',
+                    data: error,
+                    backgroundColor: '#ff1744'
+                }]
+            }
+        });
+    </script>
+
+</body>
+
+</html>

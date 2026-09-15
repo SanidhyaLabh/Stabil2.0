@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>STABIL. | Leaderboard</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&family=Poppins:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #1E1E1E;
+            color: white;
+        }
+
+        .header {
+            padding: 40px 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 42px;
+        }
+
+        .table-container {
+            padding: 0 80px 100px;
+            margin-top: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #2b2b2b;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid #333;
+        }
+
+        th,
+        td {
+            padding: 20px;
+            text-align: left;
+        }
+
+        th {
+            background: #333;
+            color: #00c853;
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 18px;
+        }
+
+        td {
+            border-bottom: 1px solid #333;
+            color: #ddd;
+        }
+
+        tr:nth-child(even) {
+            background: #2f2f2f;
+        }
+
+        tr:hover {
+            background: #383838;
+        }
+
+        .rank {
+            font-weight: 700;
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            color: white;
+            background: #333;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            background: #444;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>Top Surgical Precision Rankings</h1>
+        <a href="/dashboard" class="btn">Back to Dashboard</a>
+    </div>
+
+    <section class="table-container">
+
+        <table>
+            <tr>
+                <th>Rank</th>
+                <th>User</th>
+                <th>Best PSI</th>
+                <th>Best Score (Mock)</th>
+            </tr>
+
+            {% for leader in leaders %}
+            <tr>
+                <td class="rank">{{ loop.index }}</td>
+                <td>{{ leader.name }}</td>
+                <td>{{ leader.score }}</td>
+                <td>{{ leader.mode }} (Mock)</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+    </section>
+
+</body>
+
+</html>

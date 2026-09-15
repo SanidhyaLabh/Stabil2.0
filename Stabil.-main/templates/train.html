@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STABIL. | Select Training Program</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0f1117;
+            color: #e2e8f0;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* HEADER / HERO */
+        .hero {
+            background: linear-gradient(180deg, #181b24 0%, #12141c 100%);
+            color: white;
+            padding: 40px 60px 80px 60px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            position: relative;
+            text-align: center;
+        }
+
+        .logo {
+            position: absolute;
+            top: 40px;
+            left: 60px;
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 28px;
+            letter-spacing: 2px;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: #3b82f6;
+        }
+
+        .page-title {
+            margin-top: 30px;
+        }
+
+        .page-title h1 {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 38px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .back-arrow {
+            font-size: 28px;
+            color: #94a3b8;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.2s, transform 0.2s;
+            display: inline-block;
+        }
+
+        .back-arrow:hover {
+            color: #3b82f6;
+            transform: translateX(-4px);
+        }
+
+        .page-title p {
+            margin-top: 8px;
+            color: #94a3b8;
+            font-size: 15px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        /* MAIN CONTENT WRAPPER */
+        .wrapper {
+            padding: 40px 60px 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        /* CAMERA CONFIGURATION CARD */
+        .cam-config-panel {
+            width: 100%;
+            background: #181b26;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 28px 32px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        }
+
+        .cam-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .cam-header-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .cam-icon-badge {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: rgba(59, 130, 246, 0.15);
+            color: #3b82f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .cam-header h2 {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: #f8fafc;
+        }
+
+        .cam-header p {
+            font-size: 13px;
+            color: #94a3b8;
+            margin-top: 2px;
+        }
+
+        .cam-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 24px;
+        }
+
+        .cam-card {
+            background: #1f2433;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            position: relative;
+            transition: border-color 0.2s;
+        }
+
+        .cam-card:focus-within {
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+
+        .cam-card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cam-label-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #f1f5f9;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cam-pill {
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .pill-primary {
+            background: rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+        }
+
+        .pill-secondary {
+            background: rgba(168, 85, 247, 0.2);
+            color: #c084fc;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .cam-input {
+            flex: 1;
+            background: #141722;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 8px;
+            padding: 10px 14px;
+            color: #f8fafc;
+            font-family: 'Poppins', monospace;
+            font-size: 13px;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .cam-input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+
+        .cam-input::placeholder {
+            color: #64748b;
+            font-family: 'Poppins', sans-serif;
+            font-size: 12px;
+        }
+
+        .btn-test {
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.2s, transform 0.1s;
+            white-space: nowrap;
+        }
+
+        .btn-test:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-test:active {
+            transform: scale(0.98);
+        }
+
+        .btn-test:disabled {
+            background: #475569;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .quick-presets {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .preset-label {
+            font-size: 11px;
+            color: #64748b;
+            margin-right: 4px;
+        }
+
+        .preset-chip {
+            background: rgba(255, 255, 255, 0.05);
+            color: #94a3b8;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            padding: 3px 8px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .preset-chip:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #e2e8f0;
+        }
+
+        .status-msg {
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            min-height: 20px;
+            border-radius: 6px;
+            padding: 4px 8px;
+        }
+
+        .status-idle {
+            color: #64748b;
+            background: transparent;
+        }
+
+        .status-loading {
+            color: #38bdf8;
+            background: rgba(56, 189, 248, 0.1);
+        }
+
+        .status-success {
+            color: #4ade80;
+            background: rgba(74, 222, 128, 0.1);
+        }
+
+        .status-error {
+            color: #f87171;
+            background: rgba(248, 113, 113, 0.1);
+        }
+
+        /* HARDWARE & PREVIEW ENHANCEMENTS */
+        .btn-preview {
+            background: #0d9488;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.2s, transform 0.1s;
+            white-space: nowrap;
+        }
+
+        .btn-preview:hover {
+            background: #0f766e;
+        }
+
+        .btn-preview:active {
+            transform: scale(0.98);
+        }
+
+        .btn-preview:disabled {
+            background: #475569;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .preview-box {
+            position: relative;
+            background: #090b10;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 10px;
+            text-align: center;
+            padding: 8px;
+        }
+
+        .preview-box img {
+            max-width: 100%;
+            height: auto;
+            max-height: 200px;
+            border-radius: 6px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .preview-close-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #f1f5f9;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            padding: 2px 8px;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        .preview-close-btn:hover {
+            background: #ef4444;
+        }
+
+        .telemetry-gauge {
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .telemetry-val {
+            font-size: 20px;
+            font-weight: 700;
+            color: #38bdf8;
+            font-family: monospace;
+        }
+
+        .badge-safe {
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 12px;
+            background: rgba(34, 197, 94, 0.2);
+            color: #4ade80;
+            font-weight: 600;
+        }
+
+        .badge-warn {
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 12px;
+            background: rgba(239, 68, 68, 0.25);
+            color: #f87171;
+            font-weight: 600;
+            animation: pulse-warn 1s infinite alternate;
+        }
+
+        @keyframes pulse-warn {
+            from { opacity: 0.7; }
+            to { opacity: 1; }
+        }
+
+        .pill-hardware {
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 6px;
+        }
+
+        .dot-green {
+            background: #22c55e;
+            box-shadow: 0 0 8px #22c55e;
+        }
+
+        .dot-red {
+            background: #ef4444;
+        }
+        .section-header {
+            width: 100%;
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        .section-header h2 {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 24px;
+            color: #f1f5f9;
+            letter-spacing: 0.5px;
+        }
+
+        .section-header p {
+            color: #94a3b8;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        /* CARD GRID */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            width: 100%;
+        }
+
+        /* TRAINING CARDS */
+        .training-card {
+            background: #181b26;
+            border-radius: 14px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            height: 210px;
+            width: 100%;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            text-align: left;
+            display: block;
+            padding: 0;
+        }
+
+        .training-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 35px rgba(0, 0, 0, 0.45);
+            border-color: rgba(59, 130, 246, 0.6);
+        }
+
+        .training-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.65;
+            transition: opacity 0.3s, transform 0.4s ease;
+        }
+
+        .training-card:hover img {
+            opacity: 0.85;
+            transform: scale(1.04);
+        }
+
+        .card-label {
+            position: absolute;
+            bottom: 18px;
+            left: 20px;
+            right: 20px;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            z-index: 2;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-label .play-indicator {
+            font-size: 12px;
+            background: rgba(59, 130, 246, 0.85);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        /* Overlay gradient for readability */
+        .training-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            background: linear-gradient(to top, rgba(15, 17, 23, 0.95), transparent);
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 30px 20px 60px;
+            }
+            .logo {
+                position: static;
+                margin-bottom: 20px;
+                display: block;
+            }
+            .wrapper {
+                padding: 20px 16px 60px;
+            }
+            .cam-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="hero">
+        <a href="/" class="logo">STABIL<span>.</span></a>
+
+        <div class="page-title">
+            <h1>
+                <a href="/" class="back-arrow">&larr;</a>
+                Select Training Program
+            </h1>
+            <p>Configure camera input and choose your precision module :</p>
+        </div>
+    </header>
+
+    <div class="wrapper">
+
+        <!-- HARDWARE & CAMERA DIAGNOSTICS SECTION -->
+        <section class="cam-config-panel">
+            <div class="cam-header">
+                <div class="cam-header-title">
+                    <div class="cam-icon-badge">⚡</div>
+                    <div>
+                        <h2>Hardware & Camera Diagnostics</h2>
+                        <p>Verify Arduino reach sensor, Front IP Webcam, and Side IP Webcam before beginning surgery.</p>
+                    </div>
+                </div>
+                <div>
+                    <button type="button" class="btn-test" onclick="runFullDiagnostic()" style="background:#4338ca;">
+                        ⚡ Test All Devices
+                    </button>
+                </div>
+            </div>
+
+            <div class="cam-grid">
+                <!-- 1. ARDUINO HARDWARE REACH SENSOR -->
+                <div class="cam-card">
+                    <div class="cam-card-top">
+                        <span class="cam-label-title">
+                            <span id="arduino_dot" class="pulse-dot dot-red"></span>
+                            <span>Arduino Reach Sensor</span>
+                        </span>
+                        <span class="cam-pill pill-hardware" id="arduino_pill">USB Serial</span>
+                    </div>
+
+                    <div class="input-group">
+                        <select id="arduino_port_select" class="cam-input" style="cursor: pointer;">
+                            <option value="">Auto-Detect Port...</option>
+                        </select>
+                        <button type="button" class="btn-test" id="btn_arduino_connect" onclick="connectArduino()">
+                            Connect
+                        </button>
+                        <button type="button" class="btn-preview" id="btn_arduino_stream" onclick="toggleArduinoLive()">
+                            Live Stream
+                        </button>
+                    </div>
+
+                    <div class="telemetry-gauge">
+                        <div>
+                            <span style="font-size: 11px; color: #94a3b8; display: block;">Reach Distance</span>
+                            <span id="arduino_dist_display" class="telemetry-val">--</span> <span style="color:#94a3b8; font-size:13px;">cm</span>
+                        </div>
+                        <div style="text-align: right;">
+                            <span style="font-size: 11px; color: #94a3b8; display: block;">Threshold: &lt;10.0cm</span>
+                            <span id="arduino_proximity_badge" class="badge-safe">SAFE DISTANCE</span>
+                        </div>
+                    </div>
+
+                    <div class="quick-presets">
+                        <span class="preset-label">Test:</span>
+                        <button type="button" class="preset-chip" onclick="simulateArduino(14.5)">Simulate 14.5cm</button>
+                        <button type="button" class="preset-chip" onclick="simulateArduino(8.2)" style="color:#f87171;">Simulate Alert (&lt;10cm)</button>
+                        <button type="button" class="preset-chip" onclick="loadArduinoStatus()">Rescan</button>
+                    </div>
+
+                    <div id="status_arduino" class="status-msg status-idle">
+                        <span>Ready to check Arduino</span>
+                    </div>
+                </div>
+
+                <!-- 2. FRONT / TOP VIEW CAMERA -->
+                <div class="cam-card">
+                    <div class="cam-card-top">
+                        <span class="cam-label-title">
+                            <span id="top_dot" class="pulse-dot dot-red"></span>
+                            <span>Front / Top IP Webcam</span>
+                        </span>
+                        <span class="cam-pill pill-primary">Primary Track</span>
+                    </div>
+
+                    <div class="input-group">
+                        <input 
+                            type="text" 
+                            id="top_cam_ip" 
+                            class="cam-input" 
+                            placeholder="e.g. 192.168.1.3:8080 or 0" 
+                            autocomplete="off"
+                        />
+                        <button type="button" class="btn-test" id="btn_test_top" onclick="testCamera('top')">
+                            Check
+                        </button>
+                        <button type="button" class="btn-preview" id="btn_prev_top" onclick="previewCamera('top')">
+                            📸 Preview
+                        </button>
+                    </div>
+
+                    <div class="quick-presets">
+                        <span class="preset-label">Presets:</span>
+                        <button type="button" class="preset-chip" onclick="setPreset('top', 'http://192.168.1.3:8080/video')">Phone IP</button>
+                        <button type="button" class="preset-chip" onclick="setPreset('top', '0')">Webcam 0</button>
+                        <button type="button" class="preset-chip" onclick="setPreset('top', '')">Clear</button>
+                    </div>
+
+                    <div id="preview_box_top" class="preview-box" style="display:none;">
+                        <button type="button" class="preview-close-btn" onclick="closePreview('top')">✕ Close</button>
+                        <img id="preview_img_top" alt="Front Camera Snapshot" />
+                    </div>
+
+                    <div id="status_top" class="status-msg status-idle">
+                        <span>Ready to connect</span>
+                    </div>
+                </div>
+
+                <!-- 3. SIDE VIEW CAMERA -->
+                <div class="cam-card">
+                    <div class="cam-card-top">
+                        <span class="cam-label-title">
+                            <span id="side_dot" class="pulse-dot dot-red"></span>
+                            <span>Side View IP Webcam</span>
+                        </span>
+                        <span class="cam-pill pill-secondary">Depth & Tilt</span>
+                    </div>
+
+                    <div class="input-group">
+                        <input 
+                            type="text" 
+                            id="side_cam_ip" 
+                            class="cam-input" 
+                            placeholder="e.g. 10.234.207.98:8080 or 1" 
+                            autocomplete="off"
+                        />
+                        <button type="button" class="btn-test" id="btn_test_side" onclick="testCamera('side')">
+                            Check
+                        </button>
+                        <button type="button" class="btn-preview" id="btn_prev_side" onclick="previewCamera('side')">
+                            📸 Preview
+                        </button>
+                    </div>
+
+                    <div class="quick-presets">
+                        <span class="preset-label">Presets:</span>
+                        <button type="button" class="preset-chip" onclick="setPreset('side', 'http://10.234.207.98:8080/video')">Phone IP</button>
+                        <button type="button" class="preset-chip" onclick="setPreset('side', '1')">Webcam 1</button>
+                        <button type="button" class="preset-chip" onclick="setPreset('side', '')">Clear</button>
+                    </div>
+
+                    <div id="preview_box_side" class="preview-box" style="display:none;">
+                        <button type="button" class="preview-close-btn" onclick="closePreview('side')">✕ Close</button>
+                        <img id="preview_img_side" alt="Side Camera Snapshot" />
+                    </div>
+
+                    <div id="status_side" class="status-msg status-idle">
+                        <span>Ready to connect</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TRAINING MODULES FORM -->
+        <div class="section-header">
+            <h2>Select Training Module</h2>
+            <p>Click any module below to start your tracking session with the configured cameras.</p>
+        </div>
+
+        <form id="trainForm" action="/start" method="POST" style="width: 100%;">
+            <!-- Hidden inputs dynamically synced with the camera inputs -->
+            <input type="hidden" name="top_cam_url" id="form_top_cam_url" value="">
+            <input type="hidden" name="side_cam_url" id="form_side_cam_url" value="">
+
+            <div class="card-container">
+
+                <button type="submit" name="mode" value="line" class="training-card" onclick="syncFormCameras()">
+                    <img src="{{ url_for('static', filename='images/incision.png') }}" alt="Incision">
+                    <span class="card-label">
+                        <span>Incision Training</span>
+                        <span class="play-indicator">Start &rarr;</span>
+                    </span>
+                </button>
+
+                <button type="submit" name="mode" value="circle" class="training-card" onclick="syncFormCameras()">
+                    <img src="{{ url_for('static', filename='images/circle.png') }}" alt="Circle">
+                    <span class="card-label">
+                        <span>Circle Precision Training</span>
+                        <span class="play-indicator">Start &rarr;</span>
+                    </span>
+                </button>
+
+                <button type="submit" name="mode" value="brain" class="training-card" onclick="syncFormCameras()">
+                    <img src="{{ url_for('static', filename='images/brain.png') }}" alt="Brain">
+                    <span class="card-label">
+                        <span>Brain Path Navigation</span>
+                        <span class="play-indicator">Start &rarr;</span>
+                    </span>
+                </button>
+
+                <button type="submit" name="mode" value="micro" class="training-card" onclick="syncFormCameras()">
+                    <img src="{{ url_for('static', filename='images/micro.png') }}" alt="Micro">
+                    <span class="card-label">
+                        <span>Microsurgery Stability</span>
+                        <span class="play-indicator">Start &rarr;</span>
+                    </span>
+                </button>
+
+                <button type="submit" name="mode" value="suturing" class="training-card" onclick="syncFormCameras()">
+                    <img src="{{ url_for('static', filename='images/suture.png') }}" alt="Suture">
+                    <span class="card-label">
+                        <span>Suturing Training</span>
+                        <span class="play-indicator">Start &rarr;</span>
+                    </span>
+                </button>
+
+                <button type="submit" name="mode" value="depth_drill" class="training-card" onclick="syncFormCameras()">
+                    <img src="{{ url_for('static', filename='images/depth.png') }}" alt="Depth">
+                    <span class="card-label">
+                        <span>Depth Control Drill</span>
+                        <span class="play-indicator">Start &rarr;</span>
+                    </span>
+                </button>
+
+                <button type="submit" name="mode" value="needle_target" class="training-card" onclick="syncFormCameras()">
+                    <img src="{{ url_for('static', filename='images/needle.png') }}" alt="Needle">
+                    <span class="card-label">
+                        <span>Needle Targeting</span>
+                        <span class="play-indicator">Start &rarr;</span>
+                    </span>
+                </button>
+
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const STORAGE_KEY_TOP = "stabil_top_cam_ip";
+        const STORAGE_KEY_SIDE = "stabil_side_cam_ip";
+
+        const topInput = document.getElementById("top_cam_ip");
+        const sideInput = document.getElementById("side_cam_ip");
+        const formTop = document.getElementById("form_top_cam_url");
+        const formSide = document.getElementById("form_side_cam_url");
+
+        // Load saved values from localStorage or default
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedTop = localStorage.getItem(STORAGE_KEY_TOP);
+            const savedSide = localStorage.getItem(STORAGE_KEY_SIDE);
+
+            if (savedTop !== null) {
+                topInput.value = savedTop;
+            } else {
+                topInput.value = "http://192.168.1.3:8080/video";
+            }
+
+            if (savedSide !== null) {
+                sideInput.value = savedSide;
+            } else {
+                sideInput.value = "http://10.234.207.98:8080/video";
+            }
+
+            syncFormCameras();
+            loadArduinoStatus();
+        });
+
+        // Save changes to localStorage on edit
+        topInput.addEventListener("input", () => {
+            localStorage.setItem(STORAGE_KEY_TOP, topInput.value.trim());
+            syncFormCameras();
+            resetStatus('top');
+        });
+
+        sideInput.addEventListener("input", () => {
+            localStorage.setItem(STORAGE_KEY_SIDE, sideInput.value.trim());
+            syncFormCameras();
+            resetStatus('side');
+        });
+
+        function syncFormCameras() {
+            if (formTop) formTop.value = topInput.value.trim();
+            if (formSide) formSide.value = sideInput.value.trim();
+        }
+
+        function setPreset(type, val) {
+            if (type === 'top') {
+                topInput.value = val;
+                localStorage.setItem(STORAGE_KEY_TOP, val);
+                resetStatus('top');
+            } else {
+                sideInput.value = val;
+                localStorage.setItem(STORAGE_KEY_SIDE, val);
+                resetStatus('side');
+            }
+            syncFormCameras();
+        }
+
+        function resetStatus(type) {
+            const statusEl = document.getElementById(`status_${type}`);
+            if (statusEl) {
+                statusEl.className = "status-msg status-idle";
+                statusEl.innerHTML = "<span>Ready to connect</span>";
+            }
+        }
+
+        let arduinoStreamTimer = null;
+
+        async function loadArduinoStatus() {
+            const statusEl = document.getElementById("status_arduino");
+            const dotEl = document.getElementById("arduino_dot");
+            const pillEl = document.getElementById("arduino_pill");
+            const selectEl = document.getElementById("arduino_port_select");
+            const distEl = document.getElementById("arduino_dist_display");
+            const badgeEl = document.getElementById("arduino_proximity_badge");
+
+            try {
+                const res = await fetch("/api/hardware/status");
+                const data = await res.json();
+
+                if (data.available_ports && selectEl) {
+                    const currentVal = selectEl.value;
+                    selectEl.innerHTML = '<option value="">Auto-Detect Port</option>';
+                    data.available_ports.forEach(p => {
+                        const opt = document.createElement("option");
+                        opt.value = p.device;
+                        opt.textContent = `${p.device} (${p.description})`;
+                        if (p.device === data.port || p.device === currentVal) {
+                            opt.selected = true;
+                        }
+                        selectEl.appendChild(opt);
+                    });
+                }
+
+                if (data.connected) {
+                    dotEl.className = "pulse-dot dot-green";
+                    pillEl.textContent = data.port || "CONNECTED";
+                    pillEl.style.background = "rgba(34, 197, 94, 0.2)";
+                    pillEl.style.color = "#4ade80";
+
+                    const dist = data.current_distance_cm;
+                    if (dist !== null && dist !== undefined) {
+                        distEl.textContent = dist.toFixed(1);
+                        if (dist < 10.0) {
+                            badgeEl.className = "badge-warn";
+                            badgeEl.textContent = "⚠️ PROXIMITY ALERT (<10cm)";
+                        } else {
+                            badgeEl.className = "badge-safe";
+                            badgeEl.textContent = "SAFE DISTANCE";
+                        }
+                        statusEl.className = "status-msg status-success";
+                        statusEl.innerHTML = `<span>✅ <strong>Live Telemetry:</strong> Receiving feed on ${data.port} (${dist.toFixed(1)} cm)</span>`;
+                    } else {
+                        distEl.textContent = "--";
+                        statusEl.className = "status-msg status-loading";
+                        statusEl.innerHTML = `<span>⏳ Connected on ${data.port}, waiting for ultrasonic pulse...</span>`;
+                    }
+                } else {
+                    dotEl.className = "pulse-dot dot-red";
+                    pillEl.textContent = "DISCONNECTED";
+                    pillEl.style.background = "rgba(239, 68, 68, 0.2)";
+                    pillEl.style.color = "#f87171";
+                    distEl.textContent = "--";
+                    badgeEl.className = "badge-safe";
+                    badgeEl.textContent = "IDLE";
+                    statusEl.className = "status-msg status-idle";
+                    statusEl.innerHTML = "<span>Arduino not connected. Select port or plug in USB.</span>";
+                }
+            } catch (err) {
+                if (statusEl) {
+                    statusEl.className = "status-msg status-error";
+                    statusEl.innerHTML = `<span>❌ Hardware status error: ${err.message}</span>`;
+                }
+            }
+        }
+
+        async function connectArduino() {
+            const selectEl = document.getElementById("arduino_port_select");
+            const btnEl = document.getElementById("btn_arduino_connect");
+            const statusEl = document.getElementById("status_arduino");
+            const port = selectEl.value;
+
+            btnEl.disabled = true;
+            statusEl.className = "status-msg status-loading";
+            statusEl.innerHTML = `<span>🔄 Connecting to ${port || "auto-detected port"}...</span>`;
+
+            try {
+                const res = await fetch("/api/hardware/connect", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ port: port || null })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    statusEl.className = "status-msg status-success";
+                    statusEl.innerHTML = `<span>✅ <strong>Success:</strong> ${data.message}</span>`;
+                } else {
+                    statusEl.className = "status-msg status-error";
+                    statusEl.innerHTML = `<span>⚠️ ${data.message}</span>`;
+                }
+                await loadArduinoStatus();
+            } catch (err) {
+                statusEl.className = "status-msg status-error";
+                statusEl.innerHTML = `<span>❌ Connection error: ${err.message}</span>`;
+            } finally {
+                btnEl.disabled = false;
+            }
+        }
+
+        function toggleArduinoLive() {
+            const btn = document.getElementById("btn_arduino_stream");
+            if (arduinoStreamTimer) {
+                clearInterval(arduinoStreamTimer);
+                arduinoStreamTimer = null;
+                btn.textContent = "Live Stream";
+                btn.style.background = "#0d9488";
+            } else {
+                loadArduinoStatus();
+                arduinoStreamTimer = setInterval(loadArduinoStatus, 500);
+                btn.textContent = "⏹ Stop Stream";
+                btn.style.background = "#e11d48";
+            }
+        }
+
+        async function simulateArduino(dist) {
+            try {
+                await fetch("/api/hardware/simulate_reading", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ distance: dist })
+                });
+                await loadArduinoStatus();
+            } catch (err) {
+                console.error("Simulation error:", err);
+            }
+        }
+
+        async function testCamera(type) {
+            const inputEl = type === 'top' ? topInput : sideInput;
+            const statusEl = document.getElementById(`status_${type}`);
+            const btnEl = document.getElementById(`btn_test_${type}`);
+            const dotEl = document.getElementById(`${type}_dot`);
+            const val = inputEl.value.trim();
+
+            if (!val) {
+                statusEl.className = "status-msg status-error";
+                statusEl.innerHTML = "<span>⚠️ Please enter an IP address or device index.</span>";
+                return;
+            }
+
+            statusEl.className = "status-msg status-loading";
+            statusEl.innerHTML = "<span>🔄 Testing reachability...</span>";
+            btnEl.disabled = true;
+
+            try {
+                const res = await fetch("/api/check_camera", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ url: val })
+                });
+
+                const data = await res.json();
+
+                if (data.reachable) {
+                    statusEl.className = "status-msg status-success";
+                    statusEl.innerHTML = `<span>✅ <strong>Online:</strong> ${data.message}</span>`;
+                    if (dotEl) dotEl.className = "pulse-dot dot-green";
+                } else {
+                    statusEl.className = "status-msg status-error";
+                    statusEl.innerHTML = `<span>❌ <strong>Unreachable:</strong> ${data.message}</span>`;
+                    if (dotEl) dotEl.className = "pulse-dot dot-red";
+                }
+            } catch (err) {
+                statusEl.className = "status-msg status-error";
+                statusEl.innerHTML = `<span>❌ Connection test error: ${err.message}</span>`;
+                if (dotEl) dotEl.className = "pulse-dot dot-red";
+            } finally {
+                btnEl.disabled = false;
+            }
+        }
+
+        async function previewCamera(type) {
+            const inputEl = type === 'top' ? topInput : sideInput;
+            const statusEl = document.getElementById(`status_${type}`);
+            const btnEl = document.getElementById(`btn_prev_${type}`);
+            const boxEl = document.getElementById(`preview_box_${type}`);
+            const imgEl = document.getElementById(`preview_img_${type}`);
+            const dotEl = document.getElementById(`${type}_dot`);
+            const val = inputEl.value.trim();
+
+            if (!val) {
+                statusEl.className = "status-msg status-error";
+                statusEl.innerHTML = "<span>⚠️ Please enter an IP address or device index.</span>";
+                return;
+            }
+
+            statusEl.className = "status-msg status-loading";
+            statusEl.innerHTML = "<span>📸 Grabbing live frame snapshot...</span>";
+            btnEl.disabled = true;
+
+            try {
+                const res = await fetch("/api/camera_snapshot", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ url: val })
+                });
+                const data = await res.json();
+                if (data.success && data.image) {
+                    imgEl.src = data.image;
+                    boxEl.style.display = "block";
+                    statusEl.className = "status-msg status-success";
+                    statusEl.innerHTML = `<span>✅ Frame captured successfully (${type === 'top' ? 'Front' : 'Side'} View)</span>`;
+                    if (dotEl) dotEl.className = "pulse-dot dot-green";
+                } else {
+                    boxEl.style.display = "none";
+                    statusEl.className = "status-msg status-error";
+                    statusEl.innerHTML = `<span>❌ <strong>Preview failed:</strong> ${data.message}</span>`;
+                    if (dotEl) dotEl.className = "pulse-dot dot-red";
+                }
+            } catch (err) {
+                boxEl.style.display = "none";
+                statusEl.className = "status-msg status-error";
+                statusEl.innerHTML = `<span>❌ Preview error: ${err.message}</span>`;
+                if (dotEl) dotEl.className = "pulse-dot dot-red";
+            } finally {
+                btnEl.disabled = false;
+            }
+        }
+
+        function closePreview(type) {
+            const boxEl = document.getElementById(`preview_box_${type}`);
+            if (boxEl) boxEl.style.display = "none";
+        }
+
+        async function runFullDiagnostic() {
+            await loadArduinoStatus();
+            testCamera('top');
+            testCamera('side');
+        }
+    </script>
+</body>
+
+</html>

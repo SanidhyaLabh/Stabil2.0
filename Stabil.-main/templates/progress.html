@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>STABIL. | AI Progress Planner</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&family=Poppins:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #1E1E1E;
+            color: white;
+        }
+
+        .header {
+            padding: 40px 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 42px;
+        }
+
+        .content {
+            padding: 0 80px 100px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: #2b2b2b;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid #333;
+        }
+
+        .card h2 {
+            font-family: 'Josefin Sans', sans-serif;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #ccc;
+        }
+
+        .highlight {
+            font-size: 32px;
+            font-weight: 600;
+            margin: 10px 0;
+            color: #00c853;
+        }
+
+        .sub-text {
+            color: #aaa;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            color: white;
+            background: #333;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            background: #444;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>AI Skill Progress Planner</h1>
+        <a href="/dashboard" class="btn">Back to Dashboard</a>
+    </div>
+
+    <section class="content">
+
+        <div style="margin-bottom: 20px; font-size: 18px; color: #888;">
+            Current Average PSI: <span style="color: white; font-weight: 600;">{{ avg_psi }}%</span>
+        </div>
+
+        <div class="grid">
+
+            <div class="card">
+                <h2>Recommended Training Mode</h2>
+                <div class="highlight">
+                    {% if recommendation.recommended_mode == 'line' %}Incision Training
+                    {% elif recommendation.recommended_mode == 'circle' %}Circle Precision
+                    {% elif recommendation.recommended_mode == 'micro' %}Microsurgery Stability
+                    {% elif recommendation.recommended_mode == 'depth_drill' %}Depth Control Drill
+                    {% else %}{{ recommendation.recommended_mode|title }}{% endif %}
+                </div>
+                <p class="sub-text">{{ recommendation.goal }}</p>
+            </div>
+
+            <div class="card">
+                <h2>PSI Prediction (Next 5 Sessions)</h2>
+                <div class="highlight">
+                    {% if prediction %}
+                    {{ prediction[-1] }}%
+                    {% else %}
+                    N/A
+                    {% endif %}
+                </div>
+                <p class="sub-text">
+                    {% if prediction %}
+                    Trend: {{ prediction[0] }}% &rarr; {{ prediction[-1] }}%
+                    {% else %}
+                    Complete at least 3 sessions to unlock predictions.
+                    {% endif %}
+                </p>
+                <div style="margin-top:10px; font-size:14px; color:#666;">
+                    Correlation: {{ recommendation.trend }}
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Optimization Focus</h2>
+                <div class="highlight">{{ recommendation.focus_metric }}</div>
+                <p class="sub-text">Detected as your primary area for improvement based on variance analysis.</p>
+            </div>
+
+        </div>
+    </section>
+
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+Flask
+flask-cors
+opencv-python
+numpy
+matplotlib
+scikit-learn
+gunicorn
+prismtrace-sdk>=0.4.3
+pyserial>=3.5

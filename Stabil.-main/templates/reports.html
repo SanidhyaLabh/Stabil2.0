@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block title %}Reports{% endblock %}
+
+{% block content %}
+
+<section class="hero-dark">
+    <h1>Performance Reports</h1>
+    <p>Detailed session analytics and summaries</p>
+</section>
+
+<section class="container">
+
+    <div class="card">
+        <h2>Weekly Summary</h2>
+        <p>Average PSI: 74.2</p>
+        <p>Improvement Rate: +6.3%</p>
+    </div>
+
+    <div class="card">
+        <h2>Best Performing Mode</h2>
+        <p>Microsurgery Stability</p>
+    </div>
+
+    <div class="card">
+        <h2>Most Common Error</h2>
+        <p>Depth Instability</p>
+    </div>
+
+</section>
+
+
+<script>
+    fetch("/heatmap-data")
+        .then(res => res.json())
+        .then(data => {
+            const canvas = document.getElementById("heatmapCanvas");
+            const ctx = canvas.getContext("2d");
+
+            data.forEach(point => {
+                ctx.fillStyle = `rgba(255,0,0,${point.intensity / 100})`;
+                ctx.beginPath();
+                ctx.arc(point.x, point.y, 8, 0, Math.PI * 2);
+                ctx.fill();
+            });
+        });
+</script>
+
+{% endblock %}

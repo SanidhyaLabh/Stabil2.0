@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>STABIL. | Session Replay</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&family=Poppins:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #1E1E1E;
+            color: white;
+        }
+
+        .navbar {
+            padding: 20px 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Josefin Sans', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            letter-spacing: 2px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .header {
+            padding: 40px 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 42px;
+        }
+
+        .switch-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px;
+        }
+
+        .switch-btn {
+            background: #333;
+            color: white;
+            padding: 10px 20px;
+            border: 1px solid #555;
+            cursor: pointer;
+            font-family: 'Josefin Sans', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .switch-btn:hover {
+            background: #444;
+        }
+
+        .switch-btn.active {
+            background: #00e676;
+            color: black;
+            font-weight: bold;
+            border-color: #00e676;
+        }
+
+        #graph-container {
+            width: 80%;
+            margin: 0 auto;
+            background: #1c1c1c;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            min-height: 640px;
+        }
+
+        #graph-3d {
+            width: 100%;
+            height: 600px;
+            display: none;
+        }
+
+        #graph-2d {
+            width: 100%;
+            height: 600px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="logo">STABIL.</div>
+        <div>
+            <a href="/">Home</a>
+            <a href="/result">Results</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/reports">Reports</a>
+        </div>
+    </div>
+
+    <h1 style="text-align: center; color: white; font-family: 'Josefin Sans', sans-serif; margin-top: 40px;">
+        Session Replay
+    </h1>
+
+    <div class="switch-container">
+        <button class="switch-btn active" onclick="show2D()">2D Heatmap</button>
+        <button class="switch-btn" onclick="show3D()">3D Trajectory</button>
+    </div>
+
+    <!-- Container for Graphs -->
+    <div id="graph-container">
+        <div id="graph-2d"></div>
+        <div id="graph-3d"></div>
+    </div>
+
+    <!-- Color Legend -->
+    <div style="display: flex; justify-content: center; gap: 40px; margin-top: 20px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 15px; height: 15px; background: #00ff00; border-radius: 50%;"></div>
+            <span style="color: #ccc; font-size: 14px;">Stable / Accurate</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 15px; height: 15px; background: yellow; border-radius: 50%;"></div>
+            <span style="color: #ccc; font-size: 14px;">Minor Tremor / Deviation</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 15px; height: 15px; background: red; border-radius: 50%;"></div>
+            <span style="color: #ccc; font-size: 14px;">High Tremor / Error</span>
+        </div>
+    </div>
+
+    <script>
+        let trajectoryData = [];
+
+        async function fetchData() {
+            try {
+                const response = await fetch('/heatmap-data');
+                trajectoryData = await response.json();
+
+                if (!trajectoryData || trajectoryData.length === 0) {
+                    document.getElementById('graph-2d').innerHTML = '<h3 style="text-align:center; padding-top:200px; color:#666;">No session data available.</h3>';
+                    return;
+                }
+
+                render2D();
+                render3D();
+            } catch (e) {
+                console.error("Error fetching data:", e);
+                document.getElementById('graph-2d').innerHTML = '<h3 style="text-align:center; padding-top:200px; color:#red;">Error loading session data.</h3>';
+            }
+        }
+
+        function render2D() {
+            // Plotly 2D Scatter for Heatmap approximation
+            const x = trajectoryData.map(p => p[0]);
+            const y = trajectoryData.map(p => p[1]);
+            // Invert Y for screen coordinates
+            const y_inv = y.map(v => 480 - v);
+
+            // Extract colors if available (index 3)
+            const colors = trajectoryData.map(p => {
+                if (p.length > 3) {
+                    const c = p[3]; // [b, g, r] from OpenCV
+                    return `rgb(${c[2]}, ${c[1]}, ${c[0]})`;
+                }
+                return 'blue';
+            });
+
+            const trace = {
+                x: x,
+                y: y_inv,
+                mode: 'markers',
+                marker: {
+                    color: colors,
+                    size: 8,
+                    opacity: 0.6
+                },
+                type: 'scatter'
+            };
+
+            const layout = {
+                title: '2D Trajectory Heatmap',
+                paper_bgcolor: '#1c1c1c',
+                plot_bgcolor: '#1c1c1c',
+                font: { color: 'white' },
+                xaxis: { range: [0, 640], title: 'X', showgrid: false, zeroline: false },
+                yaxis: { range: [0, 480], title: 'Y', showgrid: false, zeroline: false },
+                margin: { l: 40, r: 40, b: 40, t: 80 }
+            };
+
+            Plotly.newPlot('graph-2d', [trace], layout);
+        }
+
+        function render3D() {
+            const x = trajectoryData.map(p => p[0]);
+            const y = trajectoryData.map(p => p[1]);
+            const y_inv = y.map(v => 480 - v);
+
+            // Z-depth (index 2)
+            const z = trajectoryData.map(p => {
+                if (p.length > 2) return p[2];
+                return 0;
+            });
+
+            const colors = trajectoryData.map(p => {
+                if (p.length > 3) {
+                    const c = p[3];
+                    return `rgb(${c[2]}, ${c[1]}, ${c[0]})`;
+                }
+                return 'blue';
+            });
+
+            const trace = {
+                x: x,
+                y: y_inv,
+                z: z,
+                mode: 'markers',
+                marker: {
+                    size: 4,
+                    color: colors,
+                    opacity: 0.8
+                },
+                type: 'scatter3d'
+            };
+
+            const layout = {
+                title: '3D Surgical Path Replay',
+                paper_bgcolor: '#1c1c1c',
+                font: { color: 'white' },
+                scene: {
+                    xaxis: { title: 'X (Lateral)', range: [0, 640] },
+                    yaxis: { title: 'Y (Vertical)', range: [0, 480] },
+                    zaxis: { title: 'Z (Depth)' },
+                    camera: {
+                        eye: { x: 1.5, y: 1.5, z: 1.2 }
+                    }
+                },
+                margin: { l: 0, r: 0, b: 0, t: 50 }
+            };
+
+            Plotly.newPlot('graph-3d', [trace], layout);
+        }
+
+        function show2D() {
+            document.getElementById('graph-2d').style.display = 'block';
+            document.getElementById('graph-3d').style.display = 'none';
+            document.querySelectorAll('.switch-btn')[0].classList.add('active');
+            document.querySelectorAll('.switch-btn')[1].classList.remove('active');
+        }
+
+        function show3D() {
+            document.getElementById('graph-2d').style.display = 'none';
+            document.getElementById('graph-3d').style.display = 'block';
+            document.querySelectorAll('.switch-btn')[0].classList.remove('active');
+            document.querySelectorAll('.switch-btn')[1].classList.add('active');
+        }
+
+        fetchData();
+    </script>
+</body>
+
+</html>

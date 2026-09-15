@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>STABIL. | Session Result</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&family=Poppins:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #1E1E1E;
+            color: white;
+        }
+
+        /* TOP NAV */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 60px;
+            font-family: 'Josefin Sans', sans-serif;
+        }
+
+        .logo {
+            font-size: 28px;
+            letter-spacing: 2px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            margin-left: 30px;
+            color: #aaa;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        /* HERO CURVE SECTION */
+        .hero {
+            background: linear-gradient(135deg, #111, #2b2b2b);
+            color: white;
+            padding: 60px 60px 140px 60px;
+            border-bottom-left-radius: 60% 20%;
+            border-bottom-right-radius: 60% 20%;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 28px;
+            letter-spacing: 1px;
+            color: #aaa;
+        }
+
+        .score {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 110px;
+            margin: 20px 0;
+            font-weight: 600;
+        }
+
+        .skill {
+            background: #333;
+            color: #fff;
+            display: inline-block;
+            padding: 14px 40px;
+            border-radius: 25px;
+            font-weight: 600;
+            margin-top: 10px;
+            border: 1px solid #444;
+        }
+
+        /* CARDS SECTION */
+        .cards {
+            margin-top: -80px;
+            padding: 0 80px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: #2b2b2b;
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            width: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid #333;
+        }
+
+        .card h3 {
+            font-family: 'Josefin Sans', sans-serif;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #00c853;
+        }
+
+        .card ul {
+            padding-left: 18px;
+            color: #ccc;
+        }
+
+        .card li {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        /* METRICS LINE */
+        .metrics {
+            margin-top: 60px;
+            text-align: center;
+            font-size: 18px;
+            color: #888;
+            font-weight: 500;
+        }
+
+        /* BUTTONS */
+        .buttons {
+            margin-top: 40px;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .home-btn {
+            background: #333;
+            color: white;
+        }
+
+        .home-btn:hover {
+            background: #444;
+        }
+
+        .dashboard-btn {
+            background: #00c853;
+            color: white;
+        }
+
+        .dashboard-btn:hover {
+            background: #00e676;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <div class="navbar">
+        <div class="logo">STABIL.</div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/train">Train Again</a>
+            <a href="/dashboard">Dashboard</a>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <div class="hero">
+        <h2>PSI Score</h2>
+        <div class="score">{{ data.psi }}</div>
+        <div class="skill">Skill Level: {{ data.skill }}</div>
+    </div>
+
+    <!-- FEEDBACK CARDS -->
+    <div class="cards">
+
+        <div class="card">
+            <h3 style="color: #ff5252;">MISTAKES DETECTED</h3>
+            <ul>
+                {% if analysis.mistakes %}
+                {% for m in analysis.mistakes %}
+                <li>{{ m }}</li>
+                {% endfor %}
+                {% else %}
+                <li>None detected. Great job!</li>
+                {% endif %}
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>AI FEEDBACK</h3>
+            <ul>
+                {% for f in analysis.feedback %}
+                <li>{{ f }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- METRICS LINE -->
+    <div class="metrics">
+        Tremor : {{ data.tremor }} |
+        Error : {{ data.error }} |
+        Depth Error : {{ data.depth_error }} |
+        Pressure Validation : {{ data.pressure_dev }} |
+        {% if data.reach_distance is not none %}
+        Reach : {{ data.reach_distance }}cm |
+        Reach Deviation : {{ data.reach_error }}cm |
+        {% endif %}
+        Performance : {{ data.psi }}%
+    </div>
+
+    <!-- BUTTONS -->
+    <div class="buttons">
+        <a href="/"><button class="btn home-btn">Home</button></a>
+        <a href="/dashboard"><button class="btn dashboard-btn">Dashboard</button></a>
+        <a href="/replay"><button class="btn home-btn">View Heatmap</button></a>
+    </div>
+
+</body>
+
+</html>
